@@ -1,6 +1,7 @@
 class ListingPostsController < ApplicationController
   before_action :set_listing_post, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  
   # GET /listing_posts
   # GET /listing_posts.json
   def index
