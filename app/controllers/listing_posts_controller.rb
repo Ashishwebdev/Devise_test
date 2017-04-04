@@ -1,6 +1,6 @@
 class ListingPostsController < ApplicationController
   before_action :set_listing_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except: [:index, :show]
   # GET /listing_posts
   # GET /listing_posts.json
   def index
@@ -14,7 +14,7 @@ class ListingPostsController < ApplicationController
 
   # GET /listing_posts/new
   def new
-    @listing_post = ListingPost.new
+    @listing_post = current_user.listing_posts.build
   end
 
   # GET /listing_posts/1/edit
@@ -24,7 +24,7 @@ class ListingPostsController < ApplicationController
   # POST /listing_posts
   # POST /listing_posts.json
   def create
-    @listing_post = ListingPost.new(listing_post_params)
+    @listing_post = current_user.listing_posts.build(listing_post_params)
 
     respond_to do |format|
       if @listing_post.save
